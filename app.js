@@ -63,3 +63,85 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+const refs = {
+  imagesContainer: document.querySelector('.gallery'),
+  openModalBtn: document.querySelector('.lightbox'),
+  closeModalBtn: document.querySelector('[data-action="close-lightbox"]'),
+  
+};
+// console.log(refs.backdrop);
+const galleryEl = galleryItems.reduce((string, galleryItem) => string + `<li class="gallery__item">
+  <a
+    class="gallery__link"
+    href=${galleryItem.original}
+  >
+    <img
+      class="gallery__image"
+      src=${galleryItem.preview}
+      data-source=${galleryItem.original}
+      alt=${galleryItem.description}
+    />
+  </a>
+</li>`, '')
+refs.imagesContainer.insertAdjacentHTML('afterbegin', galleryEl)
+
+refs.imagesContainer.addEventListener('click', onOpenModal);
+refs.closeModalBtn.addEventListener('click', onCloseModal);
+// const backdrop = document.querySelector('.is-open')
+//   console.log(backdrop);
+//   backdrop.addEventListener('click', onBackdropClick)
+
+function onOpenModal(e) {
+  e.preventDefault();
+  const condition = e.target.nodeName === 'IMG'
+  console.log(condition);
+  if (condition) {
+    window.addEventListener('keydown', onEscKeyPress)
+    refs.openModalBtn.classList.add('is-open')}
+  const modalImage = document.querySelector('.lightbox__image')
+  console.log(modalImage);
+}
+
+function onCloseModal(evt) {
+  window.removeEventListener('keydown', onEscKeyPress)
+  refs.openModalBtn.classList.remove('is-open')
+}
+
+// function onBackdropClick(event) {
+//   if (event.target.classList.contains('lightbox')) {
+//     console.log(event.target.classList.contains('lightbox'));
+//     onCloseModal()
+//   }
+// }
+function onEscKeyPress(event) {
+  if (event.code === 'Escape') {
+    onCloseModal()
+  }
+
+}
+// const nav = document.querySelector(".js-nav");
+
+// nav.addEventListener("click", handleNavClick);
+
+// function handleNavClick(event) {
+//   event.preventDefault();
+  
+//   const target = event.target;
+//   console.log("event target: ", target); // посмотрите что тут
+
+//   // Проверяем тип узла, если не ссылка выходим из функции
+//   if (target.nodeName !== "A") return;
+
+//   setActiveLink(target);
+// }
+
+// function setActiveLink(nextActiveLink) {
+//   const currentActiveLink = nav.querySelector("a.active");
+
+//   if (currentActiveLink) {
+//     currentActiveLink.classList.remove("active");
+//   }
+
+//   nextActiveLink.classList.add("active");
+// }
