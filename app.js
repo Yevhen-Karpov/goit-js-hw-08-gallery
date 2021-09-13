@@ -150,19 +150,19 @@ function onEscKeyPress(event) {
 
 // =========================================================================================================
 
-function byLeft(array) {
-  for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
-      i--;
-      refs.modalImage.attributes.src.value = array[i];
-    }
-  }
-}
-function byRight(array) {
-  for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === refs.modalImage.attributes.src.value) {
-      i++;
-      refs.modalImage.attributes.src.value = array[i];
-    }
-  }
-}
+// function byLeft(array) {
+//   for (let i = 0; i < array.length; i += 1) {
+//     if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
+//       i--;
+//       refs.modalImage.attributes.src.value = array[i];
+//     }
+//   }
+// }
+// function byRight(array) {
+//   for (let i = 0; i < array.length; i += 1) {
+//     if (array[i] === refs.modalImage.attributes.src.value) {
+//       i++;
+//       refs.modalImage.attributes.src.value = array[i];
+//     }
+//   }
+// }
