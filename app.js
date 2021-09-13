@@ -104,28 +104,26 @@ function onOpenModal(e) {
   const condition = e.target.nodeName === "IMG";
   if (condition) {
     window.addEventListener("keydown", onEscKeyPress);
+    window.addEventListener("keydown", slideModalByKey);
     refs.openModalBtn.classList.add("is-open");
   }
 
   refs.modalImage.attributes.src.value = galleryItems.find(
     (galleryItem) => e.target.attributes.src.value === galleryItem.preview
   ).original;
-  // console.log(refs.modalImage.attributes.src.value);
-  window.addEventListener("keydown", slideModalByKey);
-  function slideModalByKey(e) {
-    //
-    if (e.code === "ArrowLeft") {
-      byLeft(sources);
-    }
-    if (e.code === "ArrowRight") {
-      byRight(sources);
-    }
+}
+
+function slideModalByKey(e) {
+  if (e.code === "ArrowLeft") {
+    byLeft(sources);
+  } else if (e.code === "ArrowRight") {
+    byRight(sources);
   }
 }
 
 function onCloseModal(evt) {
   window.removeEventListener("keydown", onEscKeyPress);
-  // window.removeEventListener("keydown", slideModalByKey);
+  window.removeEventListener("keydown", slideModalByKey);
   refs.openModalBtn.classList.remove("is-open");
   refs.modalImage.attributes.src.value = "";
 }
@@ -150,19 +148,19 @@ function onEscKeyPress(event) {
 
 // =========================================================================================================
 
-// function byLeft(array) {
-//   for (let i = 0; i < array.length; i += 1) {
-//     if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
-//       i--;
-//       refs.modalImage.attributes.src.value = array[i];
-//     }
-//   }
-// }
-// function byRight(array) {
-//   for (let i = 0; i < array.length; i += 1) {
-//     if (array[i] === refs.modalImage.attributes.src.value) {
-//       i++;
-//       refs.modalImage.attributes.src.value = array[i];
-//     }
-//   }
-// }
+function byLeft(array) {
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
+      i--;
+      refs.modalImage.attributes.src.value = array[i];
+    }
+  }
+}
+function byRight(array) {
+  for (let i = 0; i < array.length - 1; i += 1) {
+    if (array[i] === refs.modalImage.attributes.src.value) {
+      i++;
+      refs.modalImage.attributes.src.value = array[i];
+    }
+  }
+}
