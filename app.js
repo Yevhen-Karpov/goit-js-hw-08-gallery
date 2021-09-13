@@ -97,6 +97,7 @@ refs.imagesContainer.insertAdjacentHTML("afterbegin", galleryEl);
 
 refs.imagesContainer.addEventListener("click", onOpenModal);
 refs.closeModalBtn.addEventListener("click", onCloseModal);
+const sources = galleryItems.map((galleryItem) => galleryItem.original);
 
 function onOpenModal(e) {
   e.preventDefault();
@@ -109,10 +110,22 @@ function onOpenModal(e) {
   refs.modalImage.attributes.src.value = galleryItems.find(
     (galleryItem) => e.target.attributes.src.value === galleryItem.preview
   ).original;
+  // console.log(refs.modalImage.attributes.src.value);
+  window.addEventListener("keydown", slideModalByKey);
+  function slideModalByKey(e) {
+    //
+    if (e.code === "ArrowLeft") {
+      byLeft(sources);
+    }
+    if (e.code === "ArrowRight") {
+      byRight(sources);
+    }
+  }
 }
 
 function onCloseModal(evt) {
   window.removeEventListener("keydown", onEscKeyPress);
+  // window.removeEventListener("keydown", slideModalByKey);
   refs.openModalBtn.classList.remove("is-open");
   refs.modalImage.attributes.src.value = "";
 }
@@ -132,5 +145,24 @@ function onBackdropClick(event) {
 function onEscKeyPress(event) {
   if (event.code === "Escape") {
     onCloseModal();
+  }
+}
+
+// =========================================================================================================
+
+function byLeft(array) {
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
+      i--;
+      refs.modalImage.attributes.src.value = array[i];
+    }
+  }
+}
+function byRight(array) {
+  for (let i = 0; i < array.length - 1; i += 1) {
+    if (array[i] === refs.modalImage.attributes.src.value) {
+      i++;
+      refs.modalImage.attributes.src.value = array[i];
+    }
   }
 }
