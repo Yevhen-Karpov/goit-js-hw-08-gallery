@@ -85,6 +85,7 @@ function onEscKeyPress(event) {
 // ==================================Слайд клавишами влево/вправо=======================================================================
 
 function byLeft(array) {
+  console.log(array)
   for (let i = 0; i < array.length; i += 1) {
     if (array[i] === refs.modalImage.attributes.src.value && i > 0) {
       i--
