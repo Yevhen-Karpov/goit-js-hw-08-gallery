@@ -23,6 +23,7 @@
   "dependencies": {
     "@pnotify/core": "^5.2.0",
     "@pnotify/mobile": "^5.2.0",
+    "bootstrap": "^5.1.1",
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "pnotify": "^5.2.0",
